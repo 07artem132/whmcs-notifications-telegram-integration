@@ -1,0 +1,13 @@
+{
+    "require": {
+        "longman/telegram-bot": "^0.50.0",
+        "virgil/sdk": "^4.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Template": "",
+            "Lib\\Template":"",
+            "Lib\\Telegram":""
+        }
+    }
+}
