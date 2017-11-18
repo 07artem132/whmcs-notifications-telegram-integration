@@ -12,6 +12,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use \Lib\Template;
 use \Lib\Telegram as TelegramAPI;
+use \Lib\Licensing;
 
 /**
  * Notification module for delivering notifications via email
@@ -38,6 +39,8 @@ class Telegram implements NotificationModuleInterface {
 	 * @see \WHMCS\Module\Notification\DescriptionTrait::setLogoFileName()
 	 */
 	public function __construct() {
+		$Licensing = new Licensing();
+
 		$this->setDisplayName( 'Telegram' )
 		     ->setLogoFileName( 'logo.png' );
 	}

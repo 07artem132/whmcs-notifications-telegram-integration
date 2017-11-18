@@ -1,13 +1,16 @@
 {
     "require": {
-        "longman/telegram-bot": "^0.50.0",
-        "virgil/sdk": "^4.2"
+        "longman/telegram-bot": "^0.50.0"
     },
     "autoload": {
         "psr-0": {
             "Template": "",
             "Lib\\Template":"",
-            "Lib\\Telegram":""
-        }
+            "Lib\\Telegram":"",
+            "Lib\\Licensing":""
+        },
+        "files": [
+            "../../addons/LicensingAPIServiceVoice/Lib/Licensing.php"
+        ]
     }
 }
