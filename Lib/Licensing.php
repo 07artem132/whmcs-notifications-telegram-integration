@@ -8,9 +8,9 @@
 
 namespace Lib;
 
-use LicensingAPIServiceVoice\Lib\LicensingController as LicensingAPI;
+//use LicensingAPIServiceVoice\Lib\LicensingController as LicensingAPI;
 
-class Licensing  extends LicensingAPI{
+class Licensing  {
 	private $moduleName = 'whmcsNotificationsTelegramIntegration';
 
 	public function __construct() {
