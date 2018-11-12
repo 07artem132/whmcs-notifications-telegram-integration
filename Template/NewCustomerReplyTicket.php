@@ -18,12 +18,44 @@ class NewCustomerReplyTicket {
 	}
 
 	function FormatedNotifi( $notification ) {
-		$message = 'Cобытие:' . $this->GetName() . PHP_EOL;
+		$Title     = explode( '-', $notification->getTitle() )[1];
+		$TicketNum = trim( mb_substr( explode( '-', $notification->getTitle() )[0], 1 ) );
 
 		foreach ( $notification->getAttributes() as $attribute ) {
-			$message .= $attribute->getLabel() . '  ' . $attribute->getValue() . PHP_EOL;
+			if ( $attribute->getLabel() === 'Отдел' ) {
+				$Department = $attribute->getValue();
+			}
+			if ( $attribute->getLabel() === 'Клиент' ) {
+				$Client = $attribute->getValue();
+			}
+			if ( $attribute->getLabel() === 'Срочность' ) {
+				$Urgency = $attribute->getValue();
+			}
+			if ( $attribute->getLabel() === 'Статус' ) {
+				$Status = $attribute->getValue();
+			}
 		}
 
+		$message = sprintf( $this->GetMessage(), $Title, $Department, $notification->getUrl(), $this->GetTicketMessage( $TicketNum ) );
+
 		return $message;
+	}
+
+	function GetTicketMessage( $TicketNum ) {
+		$command = 'GetTicket';
+
+		$postData['ticketnum'] = $TicketNum;
+
+		$results = localAPI( $command, $postData );
+
+		return trim( explode( '-', $results['replies']['reply'][0]['message'] )[0] );
+	}
+
+	function GetMessage() {
+		return 'Новый ответ клиента на тикет ' .PHP_EOL
+		       . 'Тема: %s'.PHP_EOL
+		       . 'В отделе: %s'.PHP_EOL
+		       . 'Ссылка: %s'.PHP_EOL
+		       . 'Сообщение: %s'.PHP_EOL;
 	}
 }
