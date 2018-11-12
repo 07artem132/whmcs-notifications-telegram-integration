@@ -48,7 +48,7 @@ class NewCustomerReplyTicket {
 
 		$results = localAPI( $command, $postData );
 
-		return trim( explode( '-', $results['replies']['reply'][0]['message'] )[0] );
+		return trim( explode( '-', array_pop($results['replies']['reply'])['message'] )[0] );
 	}
 
 	function GetMessage() {
